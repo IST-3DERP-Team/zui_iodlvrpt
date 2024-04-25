@@ -1,7 +1,274 @@
 <mvc:View controllerName="zuiiodlvrpt.controller.main"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    displayBlock="true"
+    xmlns="sap.m"
+    height="100%"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    xmlns:uiL="sap.ui.layout"
+    xmlns:uiT="sap.ui.table">
+    <Page id="page" title="{i18n>title}" showHeader="false">
+        <content>
+            <VBox fitContainer="true" class="sidePadding">
+                <smartfilterbar:SmartFilterBar id="smartFilterBar" entitySet="ZVB_3D_IODLVRPT_FILTER" search="onSearch" persistencyKey="3DERP_CCPKey" filterContainerWidth="15rem" showClearOnFB="true"
+                    beforeVariantFetch="beforeVariantFetch" afterVariantLoad="afterVariantLoad" clear="clearSmartFilters">
+                    
+                    <smartfilterbar:controlConfiguration>
+                        <smartfilterbar:ControlConfiguration id="_IDGenControlConfiguration1" key="SBU" label="{ddtext>/SBU}" groupId="_BASIC" mandatory="mandatory" width="50px" class="mandatoryFontColor">
+                            <smartfilterbar:customControl>
+                                <ComboBox id="cboxSBU"
+                                    selectedKey="{ui>/sbu}"
+                                    change="onSBUChange"
+                                    items="{
+                                        path: '/ZVB_3DERP_SBU_SH',
+                                        templateShareable: false
+                                    }">
+                                    <core:Item id="_IDGenItem1" key="{SBU}" text="{SBU}" />
+                                </ComboBox>                                  
+                            </smartfilterbar:customControl>
+                        </smartfilterbar:ControlConfiguration>
+                    </smartfilterbar:controlConfiguration>
+
+                    <smartfilterbar:controlConfiguration>
+                        <smartfilterbar:ControlConfiguration key="IONO" label="{ddtext>/IONO}" groupId="_BASIC" mandatory="mandatory" displayBehaviour="descriptionAndId" preventInitialDataFetchInValueHelpDialog="false" width="300px" >
+                            <smartfilterbar:customControl>
+                                <MultiInput id="sffIONO" name="IONO" maxSuggestionWidth="400px" />
+                            </smartfilterbar:customControl>
+                        </smartfilterbar:ControlConfiguration>
+                    </smartfilterbar:controlConfiguration>
+
+                    <smartfilterbar:controlConfiguration>
+                        <smartfilterbar:ControlConfiguration key="PRODPLANT" label="{ddtext>/PRODPLANT}" groupId="_BASIC" displayBehaviour="descriptionAndId" preventInitialDataFetchInValueHelpDialog="false" width="300px" >
+                            <smartfilterbar:customControl>
+                                <MultiInput id="sffPRODPLANT" name="PRODPLANT" maxSuggestionWidth="400px" />
+                            </smartfilterbar:customControl>
+                        </smartfilterbar:ControlConfiguration>
+                    </smartfilterbar:controlConfiguration>
+
+                    <!-- <smartfilterbar:controlConfiguration>
+                        <smartfilterbar:ControlConfiguration key="EFFECTDT" label="{ddtext>/EFFECTDT}" groupId="_BASIC">
+                            <smartfilterbar:customControl>
+                                <DateRangeSelection id="EFFECTDTDatePicker" displayFormat="MM/dd/yyyy" valueFormat="MM/dd/yyyy" />
+                            </smartfilterbar:customControl>
+                        </smartfilterbar:ControlConfiguration>
+                    </smartfilterbar:controlConfiguration> -->
+
+                    <!-- <smartfilterbar:controlConfiguration>
+                        <smartfilterbar:ControlConfiguration key="EFFECTDT" label="{ddtext>/EFFECTDT}" groupId="_BASIC" preventInitialDataFetchInValueHelpDialog="false" />
+                    </smartfilterbar:controlConfiguration> -->
+
+                    <!-- <smartfilterbar:controlConfiguration>
+                        <smartfilterbar:ControlConfiguration key="SHIPTOPLANT" label="{ddtext>/SHIPTOPLANT}" groupId="_BASIC" preventInitialDataFetchInValueHelpDialog="false" />
+                    </smartfilterbar:controlConfiguration> -->
+
+                    <!-- <smartfilterbar:controlConfiguration>
+                        <smartfilterbar:ControlConfiguration key="PURCHPLANT" label="{ddtext>/PURCHPLANT}" groupId="_BASIC" preventInitialDataFetchInValueHelpDialog="false" />
+                    </smartfilterbar:controlConfiguration>
+
+                    <smartfilterbar:controlConfiguration>
+                        <smartfilterbar:ControlConfiguration key="PURCHGRP" label="{ddtext>/PURCHGRP}" groupId="_BASIC" preventInitialDataFetchInValueHelpDialog="false" />
+                    </smartfilterbar:controlConfiguration>
+
+                    <smartfilterbar:controlConfiguration>
+                        <smartfilterbar:ControlConfiguration id="filterVendor" key="VENDOR" label="{ddtext>/VENDOR}" groupId="_BASIC" displayBehaviour="descriptionAndId"
+                            preventInitialDataFetchInValueHelpDialog="false"> 
+                        </smartfilterbar:ControlConfiguration>
+                    </smartfilterbar:controlConfiguration>
+
+                    <smartfilterbar:controlConfiguration>
+                        <smartfilterbar:ControlConfiguration key="MATERIALGRP" label="{ddtext>/MATERIALGRP}" groupId="_BASIC" displayBehaviour="descriptionAndId" preventInitialDataFetchInValueHelpDialog="false" />   
+                    </smartfilterbar:controlConfiguration>
+
+                    <smartfilterbar:controlConfiguration>
+                        <smartfilterbar:ControlConfiguration key="MATERIALTYPE" label="{ddtext>/MATERIALTYPE}" groupId="_BASIC" preventInitialDataFetchInValueHelpDialog="false" width="15rem" >
+                            <smartfilterbar:customControl>
+                                <MultiInput id="multiInputMatTyp"
+                                    
+                                    change="onCustomSmartFilterValueHelpChange"
+                                    valueHelpRequest=".onCustomSmartFilterValueHelp"
+                                    suggestionRows="{
+                                        path: 'materialType>/results',
+                                        sorter: { path: 'MaterialType' },
+                                        length: 1000,
+                                        templateShareable: false
+                                    }">
+                                    <suggestionColumns>
+                                        <Column>
+                                            <Label text="Material Type"/>
+                                        </Column>
+                                        <Column>
+                                            <Label text="Description"/>
+                                        </Column>
+                                    </suggestionColumns>
+                                    <suggestionRows>
+                                        <ColumnListItem>
+                                            <cells>
+                                                <Label text="{materialType>MaterialType}" />
+                                                <Label text="{materialType>Description}" />
+                                            </cells>
+                                        </ColumnListItem>
+                                    </suggestionRows>
+                                </MultiInput>
+                            </smartfilterbar:customControl>
+                        </smartfilterbar:ControlConfiguration>
+                    </smartfilterbar:controlConfiguration>
+
+                    <smartfilterbar:controlConfiguration>
+                        <smartfilterbar:ControlConfiguration key="IONUMBER" label="{ddtext>/IONUMBER}" groupId="_BASIC" preventInitialDataFetchInValueHelpDialog="false" width="15rem" />
+                    </smartfilterbar:controlConfiguration>
+
+                    <smartfilterbar:controlConfiguration>
+                        <smartfilterbar:ControlConfiguration key="SEASON" label="{ddtext>/SEASON}" groupId="_BASIC" preventInitialDataFetchInValueHelpDialog="false" />
+                    </smartfilterbar:controlConfiguration> -->
+
+                    <smartfilterbar:layoutData>
+                        <FlexItemData growFactor="0"/>
+                    </smartfilterbar:layoutData>
+                </smartfilterbar:SmartFilterBar>
+
+                <VBox fitContainer="true" class="splitter" height="75%">
+                                <uiT:Table id="headerTab"
+                                    class="sapUiTinyMarginBottom sapUiTinyMarginBegin sapUiTinyMarginEnd"
+                                    visibleRowCountMode="Auto"
+                                    minAutoRowCount="1"
+                                    showColumnVisibilityMenu="true"
+                                    enableColumnFreeze="true"
+                                    selectionMode="MultiToggle"
+                                    firstVisibleRowChanged="onFirstVisibleRowChanged"
+                                    cellClick="onCellClick"
+                                    sort="onSort"
+                                    filter="onFilter"
+                                    alternateRowColors="true"
+                                    columnFreeze="onColumnUpdated"
+                                    columnMove="onColumnUpdated"
+                                    columnResize="onColumnUpdated"
+                                    columnSelect="onColumnUpdated"
+                                    columnVisibility="onColumnUpdated">
+                                    <uiT:rowSettingsTemplate>
+                                        <uiT:RowSettings highlight="{= ${EDITED} === true ? 'Warning' : null}" />
+                                    </uiT:rowSettingsTemplate>
+                                    <uiT:extension>
+                                        <OverflowToolbar>
+                                            <Text text="{counts>/header} Delivery Item/s" class="selHdrKeyFontStyle" />
+                                            <ToolbarSpacer/>
+                                            <SearchField
+                                                id="searchFieldHdr"
+                                                placeholder="Filter"
+                                                value=""
+                                                search="filterGlobally"
+                                                visible="false"
+                                                width="15rem"/>
+                                            <ToolbarSeparator/> 
+                                            <!-- <Button id="btnAddHdr" 
+                                                icon="sap-icon://add"
+                                                press="onCreate" 
+                                                tooltip="{ddtext>/ADD}"
+                                                visible="true"/> -->
+                                            <!-- <Button id="btnEditHdr" 
+                                                icon="sap-icon://edit"
+                                                press="onEdit"
+                                                tooltip="{ddtext>/EDIT}"
+                                                visible="true"/> -->
+                                            <!-- <Button id="btnAddNewHdr" 
+                                                icon="sap-icon://add"
+                                                press="onAddNewRow" 
+                                                tooltip="{ddtext>/ADD}"
+                                                visible="false"/> -->
+                                            <!-- <Button id="btnSaveHdr" 
+                                                icon="sap-icon://save"
+                                                press=".onBatchSave" 
+                                                tooltip="{ddtext>/SAVE}"
+                                                visible="false" /> -->
+                                            <!-- <Button id="btnCancelHdr" 
+                                                icon="sap-icon://sys-cancel"
+                                                press="onCancel" 
+                                                tooltip="{ddtext>/CANCEL}"
+                                                visible="false" />  -->
+                                            <!-- <Button id="btnDeleteHdr" 
+                                                icon="sap-icon://delete"
+                                                press="onDelete"
+                                                tooltip="{ddtext>/DELETE}"
+                                                visible="true"/> -->
+                                            <!-- <Button id="btnCopyHdr" 
+                                                icon="sap-icon://copy"
+                                                press="onCopy"
+                                                tooltip="{ddtext>/COPY}"
+                                                visible="true"/> -->
+                                            <Button id="btnRefreshHdr" 
+                                                icon="sap-icon://refresh"
+                                                press="onRefresh"
+                                                tooltip="{ddtext>/REFRESH}"
+                                                visible="true"/>
+                                            <!-- <Button id="btnCreateID" 
+                                                text="{ddtext>/CREATEID}"
+                                                press="onCreateID"
+                                                tooltip="{ddtext>/CREATEID}"
+                                                visible="{DisplayActionModel>/visible}"/> -->
+                                            <!-- <Button id="btnExportToExcel" 
+                                                icon="sap-icon://excel-attachment"
+                                                press="onExport"
+                                                tooltip="{ddtext>/EXPORTTOEXCEL}"
+                                                visible="{DisplayActionModel>/visible}"/> -->
+
+                                            <Button icon="sap-icon://excel-attachment" tooltip="{ddtext>/EXPORTTOEXCEL}" press="onExport" visible="true">
+                                            <customData>
+                                                <core:CustomData key="TableName" value="headerTab" />
+                                            </customData>
+                                        </Button>
+                                            <!-- <Button id="btnFullScreenHdr" 
+                                                icon="sap-icon://full-screen"
+                                                press="onTableResize"
+                                                tooltip="{ddtext>/FULLSCREEN}"
+                                                visible="{= ${ui>/fullscreen/header} === true ? false : true}" >
+                                                <customData>
+                                                    <core:CustomData key="TableId" value="headerTab" />
+                                                    <core:CustomData key="Fullscreen" value="1" />
+                                                    <core:CustomData key="Part" value="header" />
+                                                    <core:CustomData key="HeaderSize" value="100%" />
+                                                    <core:CustomData key="DetailSize" value="0%" />
+                                                </customData>
+                                            </Button> -->
+                                            <!-- <Button id="btnExitFullScreenHdr" 
+                                                icon="sap-icon://exit-full-screen"
+                                                press="onTableResize"
+                                                tooltip="{ddtext>/EXITFULLSCREEN}"
+                                                visible="{ui>/fullscreen/header}" >
+                                                <customData>
+                                                    <core:CustomData key="TableId" value="headerTab" />
+                                                    <core:CustomData key="Fullscreen" value="0" />
+                                                    <core:CustomData key="Part" value="header" />
+                                                    <core:CustomData key="HeaderSize" value="46%" />
+                                                    <core:CustomData key="DetailSize" value="54%" />
+                                                </customData>
+                                            </Button> -->
+                                            <Button id="btnTabLayoutHdr"
+                                                icon="sap-icon://grid" 
+                                                tooltip="{ddtext>/SAVELAYOUT}" 
+                                                press="onSaveTableLayout" >
+                                                <customData>
+                                                    <core:CustomData key="TableId" value="headerTab" />
+                                                </customData>
+                                            </Button>
+                                            <!-- <Button id="btnDataWrapHdr" 
+                                                text="{= ${ui>/dataWrap/headerTab} === true ? ${ddtext>/UNWRAP} : ${ddtext>/WRAP} }"
+                                                press="onWrapText"
+                                                tooltip="{= ${ui>/dataWrap/headerTab} === true ? ${ddtext>/UNWRAP} : ${ddtext>/WRAP} }"
+                                                visible="true" >
+                                                <customData>
+                                                    <core:CustomData key="TableId" value="headerTab" />
+                                                </customData>
+                                            </Button> -->
+                                        </OverflowToolbar>
+                                    </uiT:extension>
+                                    <uiT:layoutData>
+                                        <FlexItemData growFactor="1" baseSize="0%"/>
+                                    </uiT:layoutData> 
+                                </uiT:Table>
+                    <layoutData>
+                        <FlexItemData growFactor="1" baseSize="0%"/>
+                    </layoutData>
+                </VBox>
+            </VBox>
+        </content>
     </Page>
 </mvc:View>

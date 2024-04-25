@@ -1,121 +1,261 @@
 {
-  "_version": "1.48.0",
-  "sap.app": {
-    "id": "zuiiodlvrpt",
-    "type": "application",
-    "i18n": "i18n/i18n.properties",
-    "applicationVersion": {
-      "version": "0.0.1"
-    },
-    "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
-    "resources": "resources.json",
-    "sourceTemplate": {
-      "id": "@sap/generator-fiori:basic",
-      "version": "1.13.2",
-      "toolsId": "daa086b8-ad3d-4489-82b4-e35b7a2b6273"
-    },
-    "dataSources": {
-      "mainService": {
-        "uri": "/sap/opu/odata/sap/ZGW_3DERP_IODLVRT_SRV/",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "localUri": "localService/metadata.xml",
-          "odataVersion": "2.0"
+    "_version": "1.48.0",
+    "sap.app": {
+        "id": "zuiiodlvrpt",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.13.2",
+            "toolsId": "daa086b8-ad3d-4489-82b4-e35b7a2b6273"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZGW_3DERP_IODLVRT_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/mainService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "ZVB_3D_IODLVRPT_FILTER_CDS_Annotation": {
+                "uri": "/destinations/LTD888_S4HANA2022/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZVB_3D_IODLVRPT_FILTER_CDS_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/ZVB_3D_IODLVRPT_FILTER_CDS/ZVB_3D_IODLVRPT_FILTER_CDS_Annotation.xml"
+                }
+            },
+            "ZVB_3D_IODLVRPT_FILTER_CDS": {
+                "uri": "/sap/opu/odata/sap/ZVB_3D_IODLVRPT_FILTER_CDS",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "ZVB_3D_IODLVRPT_FILTER_CDS_Annotation"
+                    ],
+                    "localUri": "localService/ZVB_3D_IODLVRPT_FILTER_CDS/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "ZGW_3DERP_COMMON_SRV": {
+                "uri": "/sap/opu/odata/sap/ZGW_3DERP_COMMON_SRV",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/ZGW_3DERP_COMMON_SRV/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "ZGW_3DERP_LOCK_SRV": {
+                "uri": "/sap/opu/odata/sap/ZGW_3DERP_LOCK_SRV",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/ZGW_3DERP_LOCK_SRV/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "ZGW_3DERP_LOCK2_SRV": {
+                "uri": "/sap/opu/odata/sap/ZGW_3DERP_LOCK2_SRV",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/ZGW_3DERP_LOCK2_SRV/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "ZGW_3DERP_SRV": {
+                "uri": "/sap/opu/odata/sap/ZGW_3DERP_SRV",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/ZGW_3DERP_SRV/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
         }
-      }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.108.30",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "zuiiodlvrpt.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {}
+            },
+            "ZVB_3D_IODLVRPT_FILTER_CDS": {
+                "dataSource": "ZVB_3D_IODLVRPT_FILTER_CDS",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
+                }
+            },
+            "ZGW_3DERP_COMMON_SRV": {
+                "dataSource": "ZGW_3DERP_COMMON_SRV",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
+                }
+            },
+            "ZGW_3DERP_LOCK_SRV": {
+                "dataSource": "ZGW_3DERP_LOCK_SRV",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
+                }
+            },
+            "ZGW_3DERP_LOCK2_SRV": {
+                "dataSource": "ZGW_3DERP_LOCK2_SRV",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
+                }
+            },
+            "ZGW_3DERP_SRV": {
+                "dataSource": "ZGW_3DERP_SRV",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "zuiiodlvrpt.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "Routemain",
+                    "pattern": ":?query:",
+                    "target": [
+                        "Targetmain"
+                    ]
+                }
+            ],
+            "targets": {
+                "Targetmain": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "main",
+                    "viewName": "main"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "zuiiodlvrpt.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        },
+        "commands": {
+            "New": {
+                "shortcut": "Ctrl+I"
+            },
+            "Edit": {
+                "shortcut": "Ctrl+E"
+            },
+            "Delete": {
+                "shortcut": "Ctrl+D"
+            },
+            "Save": {
+                "shortcut": "Ctrl+S"
+            },
+            "Cancel": {
+                "shortcut": "Ctrl+X"
+            },
+            "Refresh": {
+                "shortcut": "Ctrl+R"
+            },
+            "Copy": {
+                "shortcut": "Ctrl+C"
+            }
+        },
+        "config": {
+            "fullWidth": true
+        }
     }
-  },
-  "sap.ui": {
-    "technology": "UI5",
-    "icons": {
-      "icon": "",
-      "favIcon": "",
-      "phone": "",
-      "phone@2": "",
-      "tablet": "",
-      "tablet@2": ""
-    },
-    "deviceTypes": {
-      "desktop": true,
-      "tablet": true,
-      "phone": true
-    }
-  },
-  "sap.ui5": {
-    "flexEnabled": true,
-    "dependencies": {
-      "minUI5Version": "1.108.30",
-      "libs": {
-        "sap.m": {},
-        "sap.ui.core": {},
-        "sap.f": {},
-        "sap.suite.ui.generic.template": {},
-        "sap.ui.comp": {},
-        "sap.ui.generic.app": {},
-        "sap.ui.table": {},
-        "sap.ushell": {}
-      }
-    },
-    "contentDensities": {
-      "compact": true,
-      "cozy": true
-    },
-    "models": {
-      "i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "settings": {
-          "bundleName": "zuiiodlvrpt.i18n.i18n"
-        }
-      },
-      "": {
-        "dataSource": "mainService",
-        "preload": true,
-        "settings": {}
-      }
-    },
-    "resources": {
-      "css": [
-        {
-          "uri": "css/style.css"
-        }
-      ]
-    },
-    "routing": {
-      "config": {
-        "routerClass": "sap.m.routing.Router",
-        "viewType": "XML",
-        "async": true,
-        "viewPath": "zuiiodlvrpt.view",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "clearControlAggregation": false
-      },
-      "routes": [
-        {
-          "name": "Routemain",
-          "pattern": ":?query:",
-          "target": [
-            "Targetmain"
-          ]
-        }
-      ],
-      "targets": {
-        "Targetmain": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "main",
-          "viewName": "main"
-        }
-      }
-    },
-    "rootView": {
-      "viewName": "zuiiodlvrpt.view.App",
-      "type": "XML",
-      "async": true,
-      "id": "App"
-    }
-  }
 }
